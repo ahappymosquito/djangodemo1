@@ -38,6 +38,6 @@ def depart_edit(request,nid):
 
 
 def user_list(request):
+    queryset = models.UserInfo.objects.all()
 
-
-    return render(request,'user_list.html')
+    return render(request,'user_list.html',{'queryset':queryset})
