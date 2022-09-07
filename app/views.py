@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from app import models
-
+from django import forms
 
 # Create your views here.
 def depart_list(request):
@@ -41,3 +41,52 @@ def user_list(request):
     queryset = models.UserInfo.objects.all()
 
     return render(request,'user_list.html',{'queryset':queryset})
+
+
+
+class MyForm(forms.ModelForm):
+    class Meta:
+        model = models.UserInfo
+        fields = ["name","password","age","account","create_time","depart","gender"]
+
+    def __init__(self, *args , **kwargs):
+        super().__init__(*args , **kwargs)
+
+        for name ,field in self.fields.items():
+            field.widget.attrs = {"class": "form-control","placeholder":field.label}
+
+def user_add(request):
+    if request.method == "GET":
+        form = MyForm()
+        return render(request, 'user_add.html', {"form": form})
+
+    form = MyForm(data = request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('/user/list/')
+
+    return render(request,'user_add.html',{"form":form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

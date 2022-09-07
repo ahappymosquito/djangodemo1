@@ -22,9 +22,10 @@ urlpatterns = [
     # 部门管理
     path('depart/list/', views.depart_list),
     path('depart/add/', views.depart_add),
-    path('depart/delete/',views.depart_delete),
-    path('depart/<int:nid>/edit/',views.depart_edit),
+    path('depart/delete/', views.depart_delete),
+    path('depart/<int:nid>/edit/', views.depart_edit),
 
-    #用户管理
-    path('user/list/',views.user_list),
+    # 用户管理
+    path('user/list/', views.user_list),
+    path('user/add/', views.user_add),
 ]
