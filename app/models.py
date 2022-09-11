@@ -24,3 +24,27 @@ class UserInfo(models.Model):
     gender_choices = ( (1,"男"), (2,"女") )
     gender = models.SmallIntegerField(verbose_name="性别",choices=gender_choices)
 
+
+
+class prettynum(models.Model):
+    phonenumber = models.CharField(verbose_name='电话号码',max_length=11)
+
+    price = models.IntegerField(verbose_name='价格',default=10)
+
+    level_choices = (
+        (1,"1极"),
+        (2, "2极"),
+        (3, "3极"),
+        (4, "4极"),
+    )
+
+    level = models.SmallIntegerField(verbose_name="级别",choices=level_choices,default=1)
+
+    status_choices = (
+        (1,"已使用"),
+        (0,"未使用")
+    )
+
+    status = models.SmallIntegerField(verbose_name="状态",choices=status_choices,default=0)
+
+

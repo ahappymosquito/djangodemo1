@@ -67,8 +67,24 @@ def user_add(request):
 
     return render(request,'user_add.html',{"form":form})
 
+def user_edit(request,nid):
+    row_obj = models.UserInfo.objects.filter(id=nid).first()
+    if request.method == "GET":
+        form = MyForm(instance=row_obj)
+        return render(request, 'user_edit.html', {"form": form})
 
+    form = MyForm(data = request.POST,instance=row_obj)
+    if form.is_valid():
+        form.save()
+        return redirect('/user/list/')
 
+    return render(request,'user_edit.html',{"form":form})
+
+def user_delete(request,nid):
+    models.UserInfo.objects.filter(id = nid).delete()
+
+    # return render(request,'user_list.html')
+    return redirect('/user/list/')
 
 
 
